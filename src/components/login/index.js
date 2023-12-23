@@ -1,12 +1,14 @@
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 import instance from '../../axiosConfig';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -18,7 +20,7 @@ function Login() {
       const token = response.data.token;
       
       localStorage.setItem('jwtToken', token);
-  
+      navigate('/books');
     } catch (error) {
       console.error('Erro no login:', error.message);
     }
